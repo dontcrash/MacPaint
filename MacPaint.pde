@@ -5,7 +5,7 @@ PImage bg;
 Colour current_colour = new Colour();
 //Array of shapes, stored this way to make the eraser work well
 ArrayList<Object> shapes = new ArrayList<Object>();
-boolean debug_mode = true;
+boolean debug_mode = false;
 //Mode int to keep track of what mode you are in
 int mode = 0;
 
