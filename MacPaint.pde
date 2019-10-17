@@ -5,12 +5,18 @@ Colour current_colour = new Colour();
 //Array of shapes, stored this way to make the eraser work well
 ArrayList<Object> shapes = new ArrayList<Object>();
 boolean debug_mode = true;
+//Mode int to keep track of what mode you are in
+int mode = 0;
 
 /*
   
-  Shapes available:
+  Shapes:
     nRect(x, y, w, h) - rectangle
     nCircle(x, y, d)  - circle
+    
+  Modes:
+    1) Eraser tool, call removeShapeByMouse()
+  
   
 */
 
@@ -43,5 +49,5 @@ void mouseDragged() {
 }
 
 void mouseClicked(){
- removeShapeByMouse(); 
+ removeShapeByMouse();
 }
