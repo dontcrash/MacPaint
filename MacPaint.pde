@@ -46,7 +46,8 @@ boolean debug_mode = false;
 
 void setup() {
   size(1000, 700);
-  frameRate(30);
+  //TODO check if we need to increase the frameRate later on
+  frameRate(20);
   noStroke();
   //TODO add the colour gradient to bottom right of screen
   //TODO set the inside of the "canvas" area to transparent
