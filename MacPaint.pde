@@ -49,13 +49,15 @@ void setup() {
   frameRate(30);
   noStroke();
   //TODO add the colour gradient to bottom right of screen
+  //TODO set the inside of the "canvas" area to transparent
+  //We will draw the canvas layer on top of the shapes
+  //This will ensure shapes aren't drawn on top of our application GUI
   bg = loadImage("Resources/background.png");
   if (debug_mode) stressTest(500);
 }
 
 void draw() {
   background(255);
-  image(bg, 0, 0, width, height);
   for (Object s : shapes) {
     if (s instanceof Rectangle) {
       Rectangle r = (Rectangle)s;
@@ -67,7 +69,8 @@ void draw() {
     }
   }
   fill(0);
-  if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 10, 20);
+  image(bg, 0, 0, width, height);
+  if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 20, 30);
 }
 
 //TODO make use of mouseDragged
@@ -92,7 +95,7 @@ boolean checkForTools() {
 }
 
 //Check if the user clicks on a colour icon
-boolean checkForColourChange(){
+boolean checkForColourChange() {
   //TODO code this logic using the get() function to set a colour
   //return true if the user clicks on a colour icon
   //For example, check if yellow paint is clicked
@@ -109,12 +112,12 @@ boolean checkForColourChange(){
 void mouseClicked() {
   //The following lines simply check if the user selects a "button"
   //This will return and do nothing if the user is simply clicking a tool
-  if(checkForTools()) return;
+  if (checkForTools()) return;
   //If the user didn't click on a new tool icon, check if the mouse on canvas
-  if(!mouseIsOnCanvas()) return;
+  if (!mouseIsOnCanvas()) return;
   //If the user selected a new colour
-  if(checkForColourChange()) return;
-  //TODO 
+  if (checkForColourChange()) return;
+  //TODO add if statements for each tool type
   //If the tool is ....
   if (tool == 0) {
     removeShapeByMouse();

@@ -40,7 +40,6 @@ public class Rectangle extends Shape {
     fill(c.r, c.b, c.g, c.a);
     rect(x, y, w, h);
   }
-
 }
 
 public class Circle extends Shape {
@@ -75,5 +74,4 @@ public class Circle extends Shape {
     fill(c.r, c.b, c.g, c.a);
     circle(x, y, d);
   }
-  
 }
