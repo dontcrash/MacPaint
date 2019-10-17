@@ -69,3 +69,8 @@ boolean handleCircle(Object o) {
   }
   return false;
 }
+
+boolean checkIfMouseClick(int x, int y, int w, int h){
+  //return false if the mouse isn't
+  return true;
+}
