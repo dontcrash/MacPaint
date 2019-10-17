@@ -73,39 +73,10 @@ void draw() {
   if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 20, 30);
 }
 
-//TODO make use of mouseDragged
-//I will probably code this logic in
-//I'm thinking for lines and shapes, it will show a preview and you click and drag etc
+//Show preview of a shape here if conditions are met
 void mouseDragged() {
-  //removeShapeByMouse();
-  //nCircle(mouseX, mouseY, 8);
-}
-
-//This is where we will check for all of the tool areas
-//And set tool = depending on where you click
-//Return true if a tool is selected
-boolean checkForTools() {
-  //TODO check if the mouse is clicked on tool icons
-  //Example code - if the users clicks between 0, 0 and 50, 50
-  if (checkIfMouseClick(0, 0, 50, 50)) {
-    tool = 1;
-    return true;
-  }
-  return false;
-}
-
-//Check if the user clicks on a colour icon
-boolean checkForColourChange() {
-  //TODO code this logic using the get() function to set a colour
-  //return true if the user clicks on a colour icon
-  //For example, check if yellow paint is clicked
-  if (checkIfMouseClick(0, 0, 50, 50)) {
-    current_colour.r = 200;
-    current_colour.g = 200;
-    current_colour.b = 200;
-    return true;
-  }
-  return false;
+  //TODO make use of mouseDragged - NG
+  //I will probably code this logic in, as it's somewhat complicated
 }
 
 //Check for tool clicks and canvas clicks
@@ -126,4 +97,16 @@ void mouseClicked() {
   if (tool == 1) {
     //Something here
   }
+}
+
+//Checks if the mouse is released
+//This is used to actually commit a shape to the shapes array
+void mouseReleased(){
+  //TODO this - NG
+}
+
+//Checks if the mouse is held down
+//Then in mouseDragged we will show previews of shapes
+void mousePressed(){
+  //TODO this - NG
 }
