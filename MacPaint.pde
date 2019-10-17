@@ -1,11 +1,8 @@
-//"Drawable" canvas dimensions, starting from 0,0
-//Will need to be changed to the actual drawing area
-//We can create a helper function isMouseInCanvas or something of the sorts too
-//TODO make sure these four dimensions are correct
-int canvas_x = 10;
-int canvas_y = 10;
-int canvas_width = 700;
-int canvas_height = 700;
+//"Drawable" canvas dimensions, used in helper functions
+int canvas_x = 40;
+int canvas_y = 34;
+int canvas_width = 729;
+int canvas_height = 502;
 
 //The current colour, stored in an object for ease of use
 //You can access the current colour by calling current_colour.r or .g .b etc
@@ -22,7 +19,7 @@ int tool = 0;
 
 //Boolean used to set if "debug" mode is on or off
 //Only used to test functions etc
-boolean debug_mode = false;
+boolean debug_mode = true;
 
 /*
   
@@ -54,7 +51,7 @@ void setup() {
   //We will draw the canvas layer on top of the shapes
   //This will ensure shapes aren't drawn on top of our application GUI
   bg = loadImage("Resources/background.png");
-  if (debug_mode) stressTest(500);
+  if (debug_mode) stressTest(100);
 }
 
 void draw() {
@@ -71,7 +68,7 @@ void draw() {
   }
   fill(0);
   image(bg, 0, 0, width, height);
-  if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 20, 30);
+  if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 25, 30);
 }
 
 //Show preview of a shape here if conditions are met

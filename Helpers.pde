@@ -5,12 +5,14 @@ void stressTest(int n) {
     current_colour.r = randomInt(0, 255);
     current_colour.g = randomInt(0, 255);
     current_colour.b = randomInt(0, 255);
-    int r = randomInt(1, 5);
+    int r = randomInt(1, 3);
+    int rx = randomInt(canvas_x, canvas_x + canvas_width);
+    int ry = randomInt(canvas_y, canvas_y + canvas_height);
     if (r == 1) {
-      nRect(randomInt(20, width - 50), randomInt(30, height - 50), randomInt(10, 50), randomInt(10, 50));
+      nRect(rx, ry, randomInt(10, 50), randomInt(10, 50));
     }
     if (r == 2) {
-      nCircle(randomInt(20, width - 50), randomInt(30, height - 50), randomInt(3, width/20));
+      nCircle(rx, ry, randomInt(3, width/20));
     }
   }
 }
