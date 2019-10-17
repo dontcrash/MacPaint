@@ -51,7 +51,7 @@ void setup() {
   //We will draw the canvas layer on top of the shapes
   //This will ensure shapes aren't drawn on top of our application GUI
   bg = loadImage("Resources/background.png");
-  if (debug_mode) stressTest(100);
+  if (debug_mode) stressTest(10);
 }
 
 void draw() {
