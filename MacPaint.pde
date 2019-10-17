@@ -53,4 +53,7 @@ void mouseDragged() {
 
 void mouseClicked(){
  removeShapeByMouse();
+ if(checkIfMouseClick(0, 0, 50, 50)){
+   //Will run if mouse is in that area
+ }
 }
