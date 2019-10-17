@@ -63,14 +63,22 @@ boolean handleRect(Object o) {
 
 boolean handleCircle(Object o) {
   Circle s = (Circle)o;
-  if(dist(s.getX(), s.getY(), mouseX, mouseY) < abs(s.getD()/2)){
+  if (dist(s.getX(), s.getY(), mouseX, mouseY) < abs(s.getD()/2)) {
     shapes.remove(s);
     return true;
   }
   return false;
 }
 
-boolean checkIfMouseClick(int x, int y, int w, int h){
+//TODO make this function check if the mouse is in the specified area
+boolean checkIfMouseClick(int x, int y, int w, int h) {
   //return false if the mouse isn't
+  return true;
+}
+
+//TODO check if the mouse is on the canvas area
+//Use canvas_x, canvas_y, canvas_width, canvas_height and the mouseX and mouseY
+boolean mouseIsOnCanvas(){
+  //return false if the mouse isn't within the canvas
   return true;
 }
