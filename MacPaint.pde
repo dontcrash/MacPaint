@@ -1,6 +1,7 @@
 //"Drawable" canvas dimensions, starting from 0,0
 int canvas_width = 700;
 int canvas_height = 700;
+PImage bg;
 Colour current_colour = new Colour();
 //Array of shapes, stored this way to make the eraser work well
 ArrayList<Object> shapes = new ArrayList<Object>();
@@ -24,11 +25,13 @@ void setup() {
   size(1000, 700);
   frameRate(30);
   noStroke();
+  bg = loadImage("Resources/MacPaint.png");
   if(debug_mode) stressTest(500);
 }
 
 void draw() {
   background(255);
+  image(bg, 0, 0);
   for (Object s : shapes){
     if(s instanceof Rectangle){
       Rectangle r = (Rectangle)s;
