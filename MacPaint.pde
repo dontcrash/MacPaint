@@ -22,7 +22,7 @@ int mode = 0;
 */
 
 void setup() {
-  size(1000, 700);
+  size(1100, 800);
   frameRate(30);
   noStroke();
   bg = loadImage("Resources/MacPaint.png");
@@ -31,7 +31,7 @@ void setup() {
 
 void draw() {
   background(255);
-  image(bg, 0, 0);
+  image(bg, 0, 0, width, height);
   for (Object s : shapes){
     if(s instanceof Rectangle){
       Rectangle r = (Rectangle)s;
