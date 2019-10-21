@@ -56,6 +56,8 @@ void setup() {
 
 void draw() {
   background(255);
+  //println(mouseX); 
+  //println(mouseY);
   for (Object s : shapes) {
     if (s instanceof Rectangle) {
       Rectangle r = (Rectangle)s;
@@ -99,12 +101,45 @@ void mouseClicked() {
 
 //Checks if the mouse is released
 //This is used to actually commit a shape to the shapes array
-void mouseReleased(){
+void mouseReleased() {
   //TODO this - NG
 }
 
 //Checks if the mouse is held down
 //Then in mouseDragged we will show previews of shapes
-void mousePressed(){
+void mousePressed() {
   //TODO this - NG
 }
+
+/* mouse coordinates for buttons 
+ 
+ if (838 <= mouseX && mouseX <= 925 && 51 <= mouseY && mouseY <= 151){
+ call draw tool;
+ } else if (836 <= mouseX && mouseX <= 924 && 193 <= mouseY && mouseY <= 268){
+ call eraser tool;
+ } else if (838 <= mouseX && mouseX <= 873 && 317 <= mouseY && mouseY <= 347){
+ call circle tool;
+ } else if (885 <= mouseX && mouseX <= 928 && 312 <= mouseY && mouseY <= 356){
+ call star tool;
+ } else if (861 <= mouseX && mouseX <= 895 && 360 <= mouseY && mouseY <= 390){
+ call rectangle tool;
+ } else if (837 <= mouseX && mouseX <= 919 && 442 <= mouseY && mouseY <= 516){
+ call line/stroke tool;
+ } else if (64 <= mouseX && mouseX <= 146 && 577 <= mouseY && mouseY <= 656){
+ call "blue" colour;
+ } else if (170 <= mouseX && mouseX <= 228 && 589 <= mouseY && mouseY <= 647){
+ call "green" colour;
+ } else if (245 <= mouseX && mouseX <= 303 && 597 <= mouseY && mouseY <= 663){
+ call "red" colour;
+ } else if (324 <= mouseX && mouseX <= 393 && 591 <= mouseY && mouseY <= 648){
+ call "yellow" colour;
+ } else if (417 <= mouseX && mouseX <= 500 && 582 <= mouseY && mouseY <= 657){
+ call "purple" colour;
+ } else if (523 <= mouseX && mouseX <= 600 && 591 <= mouseY && mouseY <= 648){
+ call "pink" colour;
+ } else if (629 <= mouseX && mouseX <= 706 && 578 <= mouseY && mouseY <= 662){
+ call "black" colour;
+ } else if (713 <= mouseX && mouseX <= 764 && 593 <= mouseY && mouseY <= 656){
+ call "white" colour;
+ }
+ */
