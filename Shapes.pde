@@ -1,5 +1,5 @@
 public class Shape {
-  Colour c = new Colour();
+  color c;
 }
 // creating rectangle function
 public class Rectangle extends Shape {
@@ -9,15 +9,12 @@ public class Rectangle extends Shape {
   int w;
   int h;
 
-  public Rectangle(int x1, int y1, int w1, int h1, Colour c1) {
+  public Rectangle(int x1, int y1, int w1, int h1, color c1) {
     x = x1;
     y = y1;
     w = w1;
     h = h1;
-    c.r = c1.r;
-    c.g = c1.g;
-    c.b = c1.b;
-    c.a = c1.a;
+    c = c1;
   }
 
   int getX() {
@@ -37,7 +34,7 @@ public class Rectangle extends Shape {
   }
 
   void draw() {
-    fill(c.r, c.b, c.g, c.a);
+    fill(c);
     rect(x, y, w, h);
   }
 }
@@ -49,14 +46,11 @@ public class Circle extends Shape {
   int y;
   int d;
 
-  public Circle(int x1, int y1, int d1, Colour c1) {
+  public Circle(int x1, int y1, int d1, color c1) {
     x = x1;
     y = y1;
     d = d1;
-    c.r = c1.r;
-    c.g = c1.g;
-    c.b = c1.b;
-    c.a = c1.a;
+    c = c1;
   }
 
   int getX() {
@@ -72,7 +66,7 @@ public class Circle extends Shape {
   }
 
   void draw() {
-    fill(c.r, c.b, c.g, c.a);
+    fill(c);
     circle(x, y, d);
   }
 }
@@ -85,15 +79,12 @@ public class Line extends Shape {
   int xx;
   int yy;
 
-  public Line(int x1, int y1, int x2, int y2, Colour c1) {
+  public Line(int x1, int y1, int x2, int y2, color c1) {
     x = x1;
     y = y1;
     xx = x2;
     yy = y2;
-    c.r = c1.r;
-    c.g = c1.g;
-    c.b = c1.b;
-    c.a = c1.a;
+    c = c1;
   }
 
   int getX() {
@@ -113,7 +104,7 @@ public class Line extends Shape {
   }
 
   void draw() {
-    fill(c.r, c.b, c.g, c.a);
+    fill(c);
     line(x, y, xx, yy);
   }
 }
@@ -129,17 +120,14 @@ public class Triangle extends Shape {
   int xxx;
   int yyy;
 
-  public Triangle(int x1, int y1, int x2, int y2, int x3, int y3, Colour c1) {
+  public Triangle(int x1, int y1, int x2, int y2, int x3, int y3, color c1) {
     x = x1;
     y = y1;
     xx = x2;
     yy = y2;
     xxx = x3;
     yyy = y3;
-    c.r = c1.r;
-    c.g = c1.g;
-    c.b = c1.b;
-    c.a = c1.a;
+    c = c1;
   }
 
   int getX() {
@@ -163,7 +151,7 @@ public class Triangle extends Shape {
     return yyy;
   }
   void draw() {
-    fill(c.r, c.b, c.g, c.a);
+    fill(c);
     triangle(x, y, xx, yy, xxx, yyy);
   }
 }

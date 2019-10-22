@@ -6,7 +6,7 @@ int canvas_height = 502;
 
 //The current colour, stored in an object for ease of use
 //You can access the current colour by calling current_colour.r or .g .b etc
-Colour current_colour = new Colour();
+color current_colour = color(0, 0, 0);
 
 //Array of shapes, stored this way to make the eraser work well
 ArrayList<Object> shapes = new ArrayList<Object>();
@@ -73,8 +73,12 @@ void draw() {
   }
   fill(0);
   image(bg, 0, 0, width, height);
+  if(debug_mode){
+    fill(current_colour);
+    rect(0, 0, 10, 10);
+  }
   if (dragging) {
-    fill(current_colour.r, current_colour.g, current_colour.b);
+    fill(current_colour);
     rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
   }
   if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 25, 30);

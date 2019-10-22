@@ -2,9 +2,6 @@
 //Handled this at 22fps on my MacBook Pro
 void stressTest(int n) {
   for (int i = 0; i < n; i ++) {
-    current_colour.r = randomInt(0, 255);
-    current_colour.g = randomInt(0, 255);
-    current_colour.b = randomInt(0, 255);
     int r = randomInt(1, 3);
     int rx = randomInt(canvas_x, canvas_x + canvas_width);
     int ry = randomInt(canvas_y, canvas_y + canvas_height);
@@ -15,13 +12,6 @@ void stressTest(int n) {
       nCircle(rx, ry, randomInt(3, width/20));
     }
   }
-}
-
-public class Colour {
-  public float r = 0; //red
-  public float g = 0; //green
-  public float b = 0; //blue
-  public float a = 255; //alpha
 }
 
 void nRect(int x, int y, int w, int h) {
@@ -126,9 +116,7 @@ boolean checkForColourChange() {
     color c = get(mouseX, mouseY);
     //Bounding box check if user clicks background image
     if(c == -14917233) return true;
-    current_colour.r = red(c);
-    current_colour.g = green(c);
-    current_colour.b = blue(c);
+    current_colour = c;
     return true;
   } else {
     return false;
