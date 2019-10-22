@@ -73,27 +73,35 @@ void draw() {
   }
   fill(0);
   image(bg, 0, 0, width, height);
-  if(debug_mode){
+  if (debug_mode) {
     fill(current_colour);
     rect(0, 0, 10, 10);
   }
   if (dragging) {
-    fill(current_colour);
-    rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+    if (mouseX > drag_x && mouseY > drag_y) {
+      fill(current_colour);
+      rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+    }
   }
   if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 25, 30);
 }
 
 //Show preview of a shape here if conditions are met
 void mouseDragged() {
-  //TODO make use of mouseDragged - NG
-  //I will probably code this logic in, as it's somewhat complicated
+  //Eraser
+  if (tool == 2) {
+    removeShapeByMouse();
+  }
 }
 
 //Checks if the mouse is held down
 //Then in mouseDragged we will show previews of shapes
 void mousePressed() {
   if (mouseIsOnCanvas()) {
+    //Eraser
+    if (tool == 2) {
+      removeShapeByMouse();
+    }
     //Rect tool
     if (tool == 5) {
       dragging = true;
@@ -120,7 +128,9 @@ void mouseReleased() {
   if (tool == 5) {
     if (dragging) {
       //commit shape
-      nRect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+      if (mouseX > drag_x && mouseY > drag_y) {
+        nRect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+      }
       dragging = false;
     }
   }
