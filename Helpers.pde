@@ -92,10 +92,28 @@ boolean mouseIsOnCanvas() {
 //Check if the user clicks on a colour icon
 boolean checkForColourChange() {
   boolean colour_change = false;
-  if (checkIfMouseClick(0, 0, 50, 50)) {
+  if (checkIfMouseClick(64, 146, 577, 656)) {
     colour_change = true;
   }
-  if (checkIfMouseClick(50, 50, 50, 50)) {
+  if (checkIfMouseClick(170, 228, 589, 647)) {
+    colour_change = true;
+  }
+  if (checkIfMouseClick(245, 303, 597, 663)) {
+    colour_change = true;
+  }
+  if (checkIfMouseClick(324, 393, 591, 648)) {
+    colour_change = true;
+  }
+  if (checkIfMouseClick(417, 500, 582, 657)) {
+    colour_change = true;
+  }
+  if (checkIfMouseClick(523, 600, 591, 648)) {
+    colour_change = true;
+  }
+  if (checkIfMouseClick(629, 706, 578, 662)) {
+    colour_change = true;
+  }
+  if (checkIfMouseClick(713, 764, 593, 656)) {
     colour_change = true;
   }
   if (colour_change) {
@@ -109,25 +127,6 @@ boolean checkForColourChange() {
   }
 }
 
-/*
- else if (64 <= mouseX && mouseX <= 146 && 577 <= mouseY && mouseY <= 656){
- call "blue" colour;
- } else if (170 <= mouseX && mouseX <= 228 && 589 <= mouseY && mouseY <= 647){
- call "green" colour;
- } else if (245 <= mouseX && mouseX <= 303 && 597 <= mouseY && mouseY <= 663){
- call "red" colour;
- } else if (324 <= mouseX && mouseX <= 393 && 591 <= mouseY && mouseY <= 648){
- call "yellow" colour;
- } else if (417 <= mouseX && mouseX <= 500 && 582 <= mouseY && mouseY <= 657){
- call "purple" colour;
- } else if (523 <= mouseX && mouseX <= 600 && 591 <= mouseY && mouseY <= 648){
- call "pink" colour;
- } else if (629 <= mouseX && mouseX <= 706 && 578 <= mouseY && mouseY <= 662){
- call "black" colour;
- } else if (713 <= mouseX && mouseX <= 764 && 593 <= mouseY && mouseY <= 656){
- call "white" colour;
- 
- */
 //This is where we will check for all of the tool areas
 //And set tool = depending on where you click
 //Return true if a tool is selected
