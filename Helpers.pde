@@ -86,7 +86,11 @@ boolean mouseIsOnCanvas() {
   //TODO check if the mouse is on the canvas area
   //Use canvas_x, canvas_y, canvas_width, canvas_height and the mouseX and mouseY
   //return false if the mouse isn't within the canvas
-  return true;
+  if (canvas_x <= mouseX && mouseX <= canvas_width + canvas_x && canvas_y - height <= mouseY && mouseY <= canvas_height + canvas_y) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 //Check if the user clicks on a colour icon
