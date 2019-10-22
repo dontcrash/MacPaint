@@ -1,5 +1,11 @@
 public class Shape {
+  
   color c;
+  
+  public Shape(){
+    sendToOldArray();
+  }
+  
 }
 // creating rectangle function
 public class Rectangle extends Shape {
@@ -40,16 +46,18 @@ public class Rectangle extends Shape {
 }
 
 //creating circle function
-public class Circle extends Shape {
+public class Ellipse extends Shape {
 
   int x;
   int y;
-  int d;
+  int w;
+  int h;
 
-  public Circle(int x1, int y1, int d1, color c1) {
+  public Ellipse(int x1, int y1, int w1, int h1, color c1) {
     x = x1;
     y = y1;
-    d = d1;
+    w = w1;
+    h = h1;
     c = c1;
   }
 
@@ -60,14 +68,14 @@ public class Circle extends Shape {
   int getY() { 
     return y;
   }
-
-  int getD() {
-    return d;
+  
+  int getD(){
+    return w;
   }
 
   void draw() {
     fill(c);
-    circle(x, y, d);
+    ellipse(x, y, w, h);
   }
 }
 

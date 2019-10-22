@@ -9,7 +9,7 @@ void stressTest(int n) {
       nRect(rx, ry, randomInt(10, 50), randomInt(10, 50));
     }
     if (r == 2) {
-      nCircle(rx, ry, randomInt(3, width/20));
+      nEllipse(rx, ry, randomInt(3, width/20), randomInt(3, width/20));
     }
   }
 }
@@ -18,8 +18,8 @@ void nRect(int x, int y, int w, int h) {
   addToShapes(new Rectangle(x, y, w, h, current_colour));
 }
 
-void nCircle(int x, int y, int d) {
-  addToShapes(new Circle(x, y, d, current_colour));
+void nEllipse(int x, int y, int w, int h) {
+  addToShapes(new Ellipse(x, y, w, h, current_colour));
 }
 
 void addToShapes(Shape s) {
@@ -36,8 +36,8 @@ void removeShapeByMouse() {
     if (s instanceof Rectangle) {
       if (handleRect(s)) break;
     }
-    if (s instanceof Circle) {
-      if (handleCircle(s)) break;
+    if (s instanceof Ellipse) {
+      if (handleEllipse(s)) break;
     }
   }
 }
@@ -53,8 +53,8 @@ boolean handleRect(Object o) {
   return false;
 }
 
-boolean handleCircle(Object o) {
-  Circle s = (Circle)o;
+boolean handleEllipse(Object o) {
+  Ellipse s = (Ellipse)o;
   if (dist(s.getX(), s.getY(), mouseX, mouseY) < abs(s.getD()/2)) {
     shapes.remove(s);
     return true;
@@ -156,4 +156,8 @@ boolean checkForTools() {
   } else {
     return false;
   }
+}
+
+void sendToOldArray(){
+  old_shapes = (ArrayList)shapes.clone();
 }

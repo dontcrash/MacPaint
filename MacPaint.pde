@@ -4,9 +4,16 @@ int canvas_y = 34;
 int canvas_width = 729;
 int canvas_height = 502;
 
+//Store variables to detect Command + Z
+boolean command_down = false;
+boolean z_down = false;
+
 //The current colour, stored in an object for ease of use
 //You can access the current colour by calling current_colour.r or .g .b etc
 color current_colour = color(0, 0, 0);
+
+//Used for "undo"
+ArrayList<Object> old_shapes = new ArrayList<Object>();
 
 //Array of shapes, stored this way to make the eraser work well
 ArrayList<Object> shapes = new ArrayList<Object>();
@@ -48,6 +55,7 @@ boolean dragging = false;
 
 void setup() {
   size(1000, 700);
+  ellipseMode(CORNER);
   //TODO check if we need to increase the frameRate later on
   frameRate(60);
   noStroke();
@@ -68,23 +76,26 @@ void draw() {
       Rectangle r = (Rectangle)s;
       r.draw();
     }
-    if (s instanceof Circle) {
-      Circle c = (Circle)s;
+    if (s instanceof Ellipse) {
+      Ellipse c = (Ellipse)s;
       c.draw();
     }
   }
   fill(0);
-  image(bg, 0, 0, width, height);
   if (debug_mode) {
     fill(current_colour);
     rect(0, 0, 10, 10);
   }
   if (dragging) {
-    if (mouseX > drag_x && mouseY > drag_y) {
-      fill(current_colour);
+    fill(current_colour);
+    if (tool == 5) {
       rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
     }
+    if (tool == 3) {
+      ellipse(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+    }
   }
+  image(bg, 0, 0, width, height);
   if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 25, 30);
   stroke(0);
   fill(0, 0, 0, 0);
@@ -133,6 +144,11 @@ void mousePressed() {
       drag_x = mouseX;
       drag_y = mouseY;
     }
+    if (tool == 3) {
+      dragging = true;
+      drag_x = mouseX;
+      drag_y = mouseY;
+    }
     //If the tool is ....
     if (tool == 1) {
       //Something here
@@ -149,14 +165,50 @@ void mousePressed() {
 //Checks if the mouse is released
 //This is used to actually commit a shape to the shapes array
 void mouseReleased() {
+  int mx = mouseX;
+  int my = mouseY;
   //Rect tool
   if (tool == 5) {
     if (dragging) {
       //commit shape
-      if (mouseX > drag_x && mouseY > drag_y) {
-        nRect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+      if (mx > drag_x && my > drag_y) {
+        nRect(drag_x, drag_y, mx - drag_x, my - drag_y);
       }
       dragging = false;
     }
+  }
+  //Circle tool
+  if (tool == 3) {
+    if (dragging) {
+      //commit shape
+      if (mx > drag_x && my > drag_y) {
+        nEllipse(drag_x, drag_y, mx - drag_x, my - drag_y);
+      }
+      dragging = false;
+    }
+  }
+}
+
+void keyPressed() { 
+  if (key == 122) {
+    z_down = true;
+  }
+  if (key == 65535) {
+    command_down = true;
+  }
+  //Command + Z (undo)
+  if (command_down && z_down) {
+    command_down = false;
+    z_down = false;
+    shapes = (ArrayList)old_shapes.clone();
+  }
+}
+
+void keyReleased() {  
+  if (key == 122) {
+    z_down = false;
+  }
+  if (key == 65535) {
+    command_down = false;
   }
 }
