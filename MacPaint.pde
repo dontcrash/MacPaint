@@ -167,25 +167,26 @@ void mousePressed() {
 void mouseReleased() {
   int mx = mouseX;
   int my = mouseY;
-  //Rect tool
-  if (tool == 5) {
-    if (dragging) {
-      //commit shape
-      if (mx > drag_x && my > drag_y) {
-        nRect(drag_x, drag_y, mx - drag_x, my - drag_y);
-      }
-      dragging = false;
+  if (dragging) {
+    //commit shape
+    //Swap positions if negative values
+    if (mx < drag_x) {
+      mx = drag_x;
+      drag_x = mouseX;
     }
-  }
-  //Circle tool
-  if (tool == 3) {
-    if (dragging) {
-      //commit shape
-      if (mx > drag_x && my > drag_y) {
-        nEllipse(drag_x, drag_y, mx - drag_x, my - drag_y);
-      }
-      dragging = false;
+    if (my < drag_y) {
+      my = drag_y;
+      drag_y = mouseY;
     }
+    //Rect
+    if (tool == 5) {
+      nRect(drag_x, drag_y, mx - drag_x, my - drag_y);
+    }
+    //Circle
+    if (tool == 3) {
+      nEllipse(drag_x, drag_y, mx - drag_x, my - drag_y);
+    }
+    dragging = false;
   }
 }
 
