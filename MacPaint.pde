@@ -92,10 +92,10 @@ void mousePressed() {
   //The following lines simply check if the user selects a "button"
   //This will return and do nothing if the user is simply clicking a tool
   if (checkForTools()) return;
-  //If the user didn't click on a new tool icon, check if the mouse on canvas
-  if (!mouseIsOnCanvas()) return;
   //If the user selected a new colour
   if (checkForColourChange()) return;
+  //If the user didn't click on a tool/colour, check if the mouse on canvas
+  if (!mouseIsOnCanvas()) return;
   //TODO add if statements for each tool type
   //Rect tool
   if (tool == 5) {

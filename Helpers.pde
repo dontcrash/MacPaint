@@ -73,8 +73,10 @@ boolean handleCircle(Object o) {
 }
 
 //Checks if the mouse is clicked in a specific area
-boolean checkIfMouseClick(int x1, int y1, int x2, int y2) {
-  if (x1 <= mouseX && mouseX <= y1 && x2 <= mouseY && mouseY <= y2) {
+boolean checkIfMouseClick(int x1, int x2, int y1, int y2) {
+  int mx = mouseX;
+  int my = mouseY;
+  if (mx > x1 && mx < x2 && my > y1 && my < y2) {
     return true;
   } else {
     return false;
@@ -122,6 +124,8 @@ boolean checkForColourChange() {
   }
   if (colour_change) {
     color c = get(mouseX, mouseY);
+    //Bounding box check if user clicks background image
+    if(c == -14917233) return true;
     current_colour.r = red(c);
     current_colour.g = green(c);
     current_colour.b = blue(c);
