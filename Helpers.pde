@@ -112,6 +112,9 @@ boolean checkForColourChange() {
   if (checkIfMouseClick(713, 764, 593, 656)) {
     colour_change = true;
   }
+  if (checkIfMouseClick(820, 960, 560, 680)) {
+    colour_change = true;
+  }
   if (colour_change) {
     color c = get(mouseX, mouseY);
     //Bounding box check if user clicks background image
