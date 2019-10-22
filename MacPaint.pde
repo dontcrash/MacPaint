@@ -48,7 +48,7 @@ boolean dragging = false;
 void setup() {
   size(1000, 700);
   //TODO check if we need to increase the frameRate later on
-  frameRate(20);
+  frameRate(60);
   noStroke();
   //TODO add the colour gradient to bottom right of screen
   //TODO set the inside of the "canvas" area to transparent
@@ -75,7 +75,7 @@ void draw() {
   image(bg, 0, 0, width, height);
   if(dragging){
     fill(current_colour.r, current_colour.g, current_colour.b);
-    rect(drag_x, drag_y, mouseX, mouseY);
+    rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
   }
   if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 25, 30);
 }
@@ -97,12 +97,11 @@ void mousePressed() {
   //If the user selected a new colour
   if (checkForColourChange()) return;
   //TODO add if statements for each tool type
-  //If the tool is ....
-  if (tool == 0) {
+  //Rect tool
+  if (tool == 5) {
     dragging = true;
     drag_x = mouseX;
     drag_y = mouseY;
-    println("set");
   }
   //If the tool is ....
   if (tool == 1) {
@@ -113,9 +112,11 @@ void mousePressed() {
 //Checks if the mouse is released
 //This is used to actually commit a shape to the shapes array
 void mouseReleased() {
-  if(tool == 0){
+  //Rect tool
+  if(tool == 5){
     if(dragging){
       //commit shape
+      nRect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
       dragging = false;
     }
   }
