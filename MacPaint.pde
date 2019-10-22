@@ -84,6 +84,16 @@ void draw() {
     }
   }
   if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 25, 30);
+  stroke(0);
+  fill(0, 0, 0, 0);
+  //Highlight selected tool
+  if (tool == 1) {
+    rect(838, 51, 100, 100);
+  }
+  if (tool == 2) {
+    rect(838, 180, 100, 100);
+  }
+  noStroke();
 }
 
 //Show preview of a shape here if conditions are met
