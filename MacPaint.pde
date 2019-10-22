@@ -19,7 +19,12 @@ int tool = 0;
 
 //Boolean used to set if "debug" mode is on or off
 //Only used to test functions etc
-boolean debug_mode = true;
+boolean debug_mode = false;
+
+//Check for mouse drag
+float drag_x = 0;
+float drag_y = 0;
+boolean dragging = false;
 
 /*
   
@@ -31,13 +36,12 @@ boolean debug_mode = true;
  stressTest(n) - stress tests the code by adding lots of shapes, n = shape count
  
  Tool integers:
- 0 - erase mode
- 1 - 
- 2 - 
- 3 - 
- 4 - 
- 5 - 
- 6 - 
+ 1 - draw
+ 2 - eraser
+ 3 - circle
+ 4 - star
+ 5 - rect
+ 6 - line
  
  */
 
@@ -78,8 +82,9 @@ void mouseDragged() {
   //I will probably code this logic in, as it's somewhat complicated
 }
 
-//Check for tool clicks and canvas clicks
-void mouseClicked() {
+//Checks if the mouse is held down
+//Then in mouseDragged we will show previews of shapes
+void mousePressed() {
   //The following lines simply check if the user selects a "button"
   //This will return and do nothing if the user is simply clicking a tool
   if (checkForTools()) return;
@@ -90,7 +95,9 @@ void mouseClicked() {
   //TODO add if statements for each tool type
   //If the tool is ....
   if (tool == 0) {
-    removeShapeByMouse();
+    dragging = true;
+    drag_x = mouseX;
+    drag_y = mouseY;
   }
   //If the tool is ....
   if (tool == 1) {
@@ -101,13 +108,12 @@ void mouseClicked() {
 //Checks if the mouse is released
 //This is used to actually commit a shape to the shapes array
 void mouseReleased() {
-  //TODO this - NG
-}
-
-//Checks if the mouse is held down
-//Then in mouseDragged we will show previews of shapes
-void mousePressed() {
-  //TODO this - NG
+  if(tool == 0){
+    if(dragging){
+      //commit shape
+      dragging = false;
+    }
+  }
 }
 
 /* mouse coordinates for buttons 
