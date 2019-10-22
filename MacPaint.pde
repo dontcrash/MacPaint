@@ -93,7 +93,19 @@ void draw() {
     rect(838, 51, 100, 100);
   }
   if (tool == 2) {
-    rect(838, 180, 100, 100);
+    rect(836, 193, 100, 80);
+  }
+  if (tool == 3) {
+    rect(838, 317, 40, 40);
+  } 
+  if (tool == 4) {
+    rect(889, 317, 40, 40);
+  } 
+  if (tool == 5) {
+    rect(858, 358, 40, 35);
+  } 
+  if (tool == 6) {
+    rect(837, 442, 80, 80);
   }
   image(colourmap, width-100, height-100, 100, 100);
   noStroke();
