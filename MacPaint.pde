@@ -107,7 +107,7 @@ void draw() {
   if (tool == 6) {
     rect(837, 442, 80, 80);
   }
-  image(colourmap, width-100, height-100, 100, 100);
+  image(colourmap, width-180, height-140, 140, 120);
   noStroke();
 }
 
