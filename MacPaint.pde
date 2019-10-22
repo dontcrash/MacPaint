@@ -22,8 +22,8 @@ int tool = 0;
 boolean debug_mode = false;
 
 //Check for mouse drag
-float drag_x = 0;
-float drag_y = 0;
+int drag_x = 0;
+int drag_y = 0;
 boolean dragging = false;
 
 /*
@@ -73,6 +73,10 @@ void draw() {
   }
   fill(0);
   image(bg, 0, 0, width, height);
+  if(dragging){
+    fill(current_colour.r, current_colour.g, current_colour.b);
+    rect(drag_x, drag_y, mouseX, mouseY);
+  }
   if (debug_mode) text("Shapes: " + shapes.size() + " - FPS: " + int(frameRate), 25, 30);
 }
 
@@ -98,6 +102,7 @@ void mousePressed() {
     dragging = true;
     drag_x = mouseX;
     drag_y = mouseY;
+    println("set");
   }
   //If the tool is ....
   if (tool == 1) {
