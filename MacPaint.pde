@@ -66,6 +66,8 @@ void setup() {
   bg = loadImage("Resources/background.png");
   colourmap = loadImage("Resources/colourmap.png");
   if (debug_mode) stressTest(10);
+  nEllipse(200, 200, 1, 100);
+  tool = 2;
 }
 
 void draw() {
@@ -120,6 +122,7 @@ void draw() {
   }
   image(colourmap, 820, 560, 140, 120);
   noStroke();
+  //TODO add current colour selection preview somewhere
 }
 
 //Show preview of a shape here if conditions are met
@@ -128,6 +131,7 @@ void mouseDragged() {
   if (tool == 2) {
     removeShapeByMouse();
   }
+  //TODO add colour picker here
 }
 
 //Checks if the mouse is held down
@@ -168,7 +172,6 @@ void mouseReleased() {
   int mx = mouseX;
   int my = mouseY;
   if (dragging) {
-    //commit shape
     //Swap positions if negative values
     if (mx < drag_x) {
       mx = drag_x;

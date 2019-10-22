@@ -55,18 +55,33 @@ boolean handleRect(Object o) {
 
 boolean handleEllipse(Object o) {
   Ellipse s = (Ellipse)o;
-  if (dist(s.getX(), s.getY(), mouseX, mouseY) < abs(s.getD()/2)) {
+  if (pointInsideEllipse(s)) {
     shapes.remove(s);
     return true;
   }
+  //Handle 1 pixel wide/high ellipses
+  if (s.getW() == 1 || s.getH() == 1) {
+    if (checkIfMouseClick(s.getX(), s.getX() + s.getW(), s.getY(), s.getY() + s.getH())) {
+      shapes.remove(s);
+      return true;
+    }
+  }
   return false;
+}
+
+boolean pointInsideEllipse(Ellipse s) {
+  double rx = s.getW() / 2;
+  double ry = s.getH() / 2;
+  double tx = (mouseX - (s.getX() + rx)) / rx;
+  double ty = (mouseY - (s.getY() + ry)) / ry;
+  return tx * tx + ty * ty <= 1.0;
 }
 
 //Checks if the mouse is clicked in a specific area
 boolean checkIfMouseClick(int x1, int x2, int y1, int y2) {
   int mx = mouseX;
   int my = mouseY;
-  if (mx > x1 && mx < x2 && my > y1 && my < y2) {
+  if (mx >= x1 && mx <= x2 && my >= y1 && my <= y2) {
     return true;
   } else {
     return false;
@@ -118,7 +133,7 @@ boolean checkForColourChange() {
   if (colour_change) {
     color c = get(mouseX, mouseY);
     //Bounding box check if user clicks background image
-    if(c == -14917233) return true;
+    if (c == -14917233) return true;
     current_colour = c;
     return true;
   } else {
@@ -158,6 +173,6 @@ boolean checkForTools() {
   }
 }
 
-void sendToOldArray(){
+void sendToOldArray() {
   old_shapes = (ArrayList)shapes.clone();
 }

@@ -69,8 +69,12 @@ public class Ellipse extends Shape {
     return y;
   }
   
-  int getD(){
+  int getW(){
     return w;
+  }
+  
+  int getH(){
+    return h;
   }
 
   void draw() {
