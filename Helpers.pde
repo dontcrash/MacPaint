@@ -74,9 +74,12 @@ boolean handleCircle(Object o) {
 
 //Checks if the mouse is clicked in a specific area
 boolean checkIfMouseClick(int x, int y, int w, int h) {
-  //TODO make this function check if the mouse is in the specified area
-  //return false if the mouse isn't
+  if (x <= mouseX && mouseX <= y && w <= mouseY && mouseY <= h){
   return true;
+  } else {
+    return false;
+    //TODO make this function check if the mouse is in the specified area
+  //return false if the mouse isn't
 }
 
 //Checks if the mouse is in the drawable canvas area
