@@ -22,6 +22,10 @@ void nEllipse(int x, int y, int w, int h) {
   addToShapes(new Ellipse(x, y, w, h, current_colour));
 }
 
+void nLine(int x1, int y1, int x2, int y2) {
+  addToShapes(new Line(x1, y1, x2, y2, current_colour));
+}
+
 void addToShapes(Shape s) {
   shapes.add(s);
 }
@@ -39,6 +43,9 @@ void removeShapeByMouse() {
     if (s instanceof Ellipse) {
       if (handleEllipse(s)) break;
     }
+    if (s instanceof Line) {
+      if (handleLine(s)) break;
+    }
   }
 }
 
@@ -46,6 +53,7 @@ boolean handleRect(Object o) {
   Rectangle s = (Rectangle)o;
   if (mouseX >= s.getX() && mouseX <= (s.getX() + s.getW())) {
     if (mouseY >= s.getY() && mouseY <= (s.getY() + s.getH())) {
+      sendToOldArray();
       shapes.remove(s);
       return true;
     }
@@ -56,6 +64,7 @@ boolean handleRect(Object o) {
 boolean handleEllipse(Object o) {
   Ellipse s = (Ellipse)o;
   if (pointInsideEllipse(s)) {
+    sendToOldArray();
     shapes.remove(s);
     return true;
   }
@@ -67,6 +76,12 @@ boolean handleEllipse(Object o) {
     }
   }
   return false;
+}
+
+boolean handleLine(Object o){
+  Line s = (Line)o;
+  //TODO this
+  return true;
 }
 
 boolean pointInsideEllipse(Ellipse s) {
@@ -90,9 +105,6 @@ boolean checkIfMouseClick(int x1, int x2, int y1, int y2) {
 
 //Checks if the mouse is in the drawable canvas area
 boolean mouseIsOnCanvas() {
-  //TODO check if the mouse is on the canvas area
-  //Use canvas_x, canvas_y, canvas_width, canvas_height and the mouseX and mouseY
-  //return false if the mouse isn't within the canvas
   if (canvas_x <= mouseX && mouseX <= canvas_width + canvas_x && canvas_y - height <= mouseY && mouseY <= canvas_height + canvas_y) {
     return true;
   } else {
@@ -100,9 +112,13 @@ boolean mouseIsOnCanvas() {
   }
 }
 
+//checkForColourChange()
 //Check if the user clicks on a colour icon
 boolean checkForColourChange() {
   boolean colour_change = false;
+  color c = get(mouseX, mouseY);
+  //Bounding box check if user clicks background image
+  if (c == -14917233) return false;
   if (checkIfMouseClick(64, 146, 577, 656)) {
     colour_change = true;
   }
@@ -131,10 +147,9 @@ boolean checkForColourChange() {
     colour_change = true;
   }
   if (colour_change) {
-    color c = get(mouseX, mouseY);
-    //Bounding box check if user clicks background image
-    if (c == -14917233) return true;
     current_colour = c;
+    colour_picker_frame = 30;
+    colour_picker_alpha = 255;
     return true;
   } else {
     return false;
@@ -168,9 +183,8 @@ boolean checkForTools() {
   if (checkIfMouseClick(837, 919, 442, 516)) {
     tool = 6; // line tool 
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 void sendToOldArray() {

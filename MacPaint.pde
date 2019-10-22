@@ -1,6 +1,6 @@
 //"Drawable" canvas dimensions, used in helper functions
 int canvas_x = 40;
-int canvas_y = 34;
+int canvas_y = 33;
 int canvas_width = 729;
 int canvas_height = 502;
 
@@ -34,6 +34,10 @@ int drag_x = 0;
 int drag_y = 0;
 boolean dragging = false;
 
+//Defines the colour picker preview
+int colour_picker_alpha = 0;
+int colour_picker_frame = 0;
+
 /*
   
  Shapes available:
@@ -56,23 +60,17 @@ boolean dragging = false;
 void setup() {
   size(1000, 700);
   ellipseMode(CORNER);
-  //TODO check if we need to increase the frameRate later on
-  frameRate(60);
-  noStroke();
-  //TODO add the colour gradient to bottom right of screen
-  //TODO set the inside of the "canvas" area to transparent
+  frameRate(24);
+  strokeWeight(5);
   //We will draw the canvas layer on top of the shapes
   //This will ensure shapes aren't drawn on top of our application GUI
   bg = loadImage("Resources/background.png");
   colourmap = loadImage("Resources/colourmap.png");
   if (debug_mode) stressTest(10);
-  nEllipse(200, 200, 1, 100);
-  tool = 2;
 }
 
 void draw() {
   background(255);
-  //println(mouseX + " - " + mouseY);
   for (Object s : shapes) {
     if (s instanceof Rectangle) {
       Rectangle r = (Rectangle)s;
@@ -82,19 +80,24 @@ void draw() {
       Ellipse c = (Ellipse)s;
       c.draw();
     }
+    if (s instanceof Line) {
+      Line c = (Line)s;
+      c.draw();
+      noStroke();
+    }
   }
   fill(0);
-  if (debug_mode) {
-    fill(current_colour);
-    rect(0, 0, 10, 10);
-  }
   if (dragging) {
     fill(current_colour);
+    if (tool == 3) {
+      ellipse(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+    }
     if (tool == 5) {
       rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
     }
-    if (tool == 3) {
-      ellipse(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+    if(tool == 6){
+      stroke(current_colour);
+      line(drag_x, drag_y, mouseX, mouseY);
     }
   }
   image(bg, 0, 0, width, height);
@@ -122,16 +125,28 @@ void draw() {
   }
   image(colourmap, 820, 560, 140, 120);
   noStroke();
-  //TODO add current colour selection preview somewhere
+  if(colour_picker_alpha > 0){
+    colour_picker_frame --;
+    if(colour_picker_frame <= 0){
+      colour_picker_alpha -= 20;
+    }
+    fill(red(current_colour), green(current_colour), blue(current_colour), colour_picker_alpha);
+    rect(canvas_x, canvas_y + canvas_height - 20 + 1, canvas_width, 20);
+  }
 }
 
 //Show preview of a shape here if conditions are met
 void mouseDragged() {
-  //Eraser
-  if (tool == 2) {
-    removeShapeByMouse();
+  if (mouseIsOnCanvas()) {
+    //Eraser
+    if (tool == 2) {
+      removeShapeByMouse();
+    }
+  } else {
+    if (checkIfMouseClick(820, 960, 560, 680)) {
+      checkForColourChange();
+    }
   }
-  //TODO add colour picker here
 }
 
 //Checks if the mouse is held down
@@ -142,20 +157,22 @@ void mousePressed() {
     if (tool == 2) {
       removeShapeByMouse();
     }
+    if (tool == 3) {
+      dragging = true;
+      drag_x = mouseX;
+      drag_y = mouseY;
+    }
     //Rect tool
     if (tool == 5) {
       dragging = true;
       drag_x = mouseX;
       drag_y = mouseY;
     }
-    if (tool == 3) {
+    //Line tool
+    if (tool == 6) {
       dragging = true;
       drag_x = mouseX;
       drag_y = mouseY;
-    }
-    //If the tool is ....
-    if (tool == 1) {
-      //Something here
     }
   } else {
     //The following lines simply check if the user selects a "button"
@@ -173,21 +190,25 @@ void mouseReleased() {
   int my = mouseY;
   if (dragging) {
     //Swap positions if negative values
-    if (mx < drag_x) {
+    if (mx < drag_x && tool != 6) {
       mx = drag_x;
       drag_x = mouseX;
     }
-    if (my < drag_y) {
+    if (my < drag_y && tool != 6) {
       my = drag_y;
       drag_y = mouseY;
+    }
+    //Circle
+    if (tool == 3) {
+      nEllipse(drag_x, drag_y, mx - drag_x, my - drag_y);
     }
     //Rect
     if (tool == 5) {
       nRect(drag_x, drag_y, mx - drag_x, my - drag_y);
     }
-    //Circle
-    if (tool == 3) {
-      nEllipse(drag_x, drag_y, mx - drag_x, my - drag_y);
+    //Line
+    if(tool == 6){
+      nLine(drag_x, drag_y, mouseX, mouseY);
     }
     dragging = false;
   }
