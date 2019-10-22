@@ -73,13 +73,12 @@ boolean handleCircle(Object o) {
 }
 
 //Checks if the mouse is clicked in a specific area
-boolean checkIfMouseClick(int x, int y, int w, int h) {
-  if (x <= mouseX && mouseX <= y && w <= mouseY && mouseY <= h){
-  return true;
+boolean checkIfMouseClick(int x1, int y1, int x2, int y2) {
+  if (x1 <= mouseX && mouseX <= y1 && x2 <= mouseY && mouseY <= y2) {
+    return true;
   } else {
     return false;
-    //TODO make this function check if the mouse is in the specified area
-  //return false if the mouse isn't
+  }
 }
 
 //Checks if the mouse is in the drawable canvas area
@@ -105,7 +104,7 @@ boolean checkForColourChange() {
     current_colour.g = green(c);
     current_colour.b = blue(c);
     return true;
-  }else{
+  } else {
     return false;
   }
 }
@@ -127,8 +126,8 @@ boolean checkForColourChange() {
  call "black" colour;
  } else if (713 <= mouseX && mouseX <= 764 && 593 <= mouseY && mouseY <= 656){
  call "white" colour;
-
-*/
+ 
+ */
 //This is where we will check for all of the tool areas
 //And set tool = depending on where you click
 //Return true if a tool is selected
