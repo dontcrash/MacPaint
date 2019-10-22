@@ -18,10 +18,10 @@ void stressTest(int n) {
 }
 
 public class Colour {
-  public int r = 0; //red
-  public int g = 0; //green
-  public int b = 0; //blue
-  public int a = 255; //alpha
+  public float r = 0; //red
+  public float g = 0; //green
+  public float b = 0; //blue
+  public float a = 255; //alpha
 }
 
 void nRect(int x, int y, int w, int h) {
@@ -89,18 +89,43 @@ boolean mouseIsOnCanvas() {
 
 //Check if the user clicks on a colour icon
 boolean checkForColourChange() {
-  //TODO code this logic using the get() function to set a colour
-  //return true if the user clicks on a colour icon
-  //For example, check if yellow paint is clicked
+  boolean colour_change = false;
   if (checkIfMouseClick(0, 0, 50, 50)) {
-    current_colour.r = 200;
-    current_colour.g = 200;
-    current_colour.b = 200;
-    return true;
+    colour_change = true;
   }
-  return false;
+  if (checkIfMouseClick(50, 50, 50, 50)) {
+    colour_change = true;
+  }
+  if (colour_change) {
+    color c = get(mouseX, mouseY);
+    current_colour.r = red(c);
+    current_colour.g = green(c);
+    current_colour.b = blue(c);
+    return true;
+  }else{
+    return false;
+  }
 }
 
+/*
+ else if (64 <= mouseX && mouseX <= 146 && 577 <= mouseY && mouseY <= 656){
+ call "blue" colour;
+ } else if (170 <= mouseX && mouseX <= 228 && 589 <= mouseY && mouseY <= 647){
+ call "green" colour;
+ } else if (245 <= mouseX && mouseX <= 303 && 597 <= mouseY && mouseY <= 663){
+ call "red" colour;
+ } else if (324 <= mouseX && mouseX <= 393 && 591 <= mouseY && mouseY <= 648){
+ call "yellow" colour;
+ } else if (417 <= mouseX && mouseX <= 500 && 582 <= mouseY && mouseY <= 657){
+ call "purple" colour;
+ } else if (523 <= mouseX && mouseX <= 600 && 591 <= mouseY && mouseY <= 648){
+ call "pink" colour;
+ } else if (629 <= mouseX && mouseX <= 706 && 578 <= mouseY && mouseY <= 662){
+ call "black" colour;
+ } else if (713 <= mouseX && mouseX <= 764 && 593 <= mouseY && mouseY <= 656){
+ call "white" colour;
+
+*/
 //This is where we will check for all of the tool areas
 //And set tool = depending on where you click
 //Return true if a tool is selected

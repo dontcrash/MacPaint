@@ -56,8 +56,7 @@ void setup() {
 
 void draw() {
   background(255);
-  //println(mouseX); 
-  //println(mouseY);
+  //println(mouseX + " - " + mouseY);
   for (Object s : shapes) {
     if (s instanceof Rectangle) {
       Rectangle r = (Rectangle)s;
@@ -125,21 +124,6 @@ void mousePressed() {
  call rectangle tool;
  } else if (837 <= mouseX && mouseX <= 919 && 442 <= mouseY && mouseY <= 516){
  call line/stroke tool;
- } else if (64 <= mouseX && mouseX <= 146 && 577 <= mouseY && mouseY <= 656){
- call "blue" colour;
- } else if (170 <= mouseX && mouseX <= 228 && 589 <= mouseY && mouseY <= 647){
- call "green" colour;
- } else if (245 <= mouseX && mouseX <= 303 && 597 <= mouseY && mouseY <= 663){
- call "red" colour;
- } else if (324 <= mouseX && mouseX <= 393 && 591 <= mouseY && mouseY <= 648){
- call "yellow" colour;
- } else if (417 <= mouseX && mouseX <= 500 && 582 <= mouseY && mouseY <= 657){
- call "purple" colour;
- } else if (523 <= mouseX && mouseX <= 600 && 591 <= mouseY && mouseY <= 648){
- call "pink" colour;
- } else if (629 <= mouseX && mouseX <= 706 && 578 <= mouseY && mouseY <= 662){
- call "black" colour;
- } else if (713 <= mouseX && mouseX <= 764 && 593 <= mouseY && mouseY <= 656){
- call "white" colour;
+ }
  }
  */
