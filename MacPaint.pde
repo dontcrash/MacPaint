@@ -39,7 +39,7 @@ boolean dragging = false;
  1 - draw
  2 - eraser
  3 - circle
- 4 - star
+ 4 - triangle
  5 - rect
  6 - line
  
@@ -73,7 +73,7 @@ void draw() {
   }
   fill(0);
   image(bg, 0, 0, width, height);
-  if(dragging){
+  if (dragging) {
     fill(current_colour.r, current_colour.g, current_colour.b);
     rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
   }
@@ -89,23 +89,23 @@ void mouseDragged() {
 //Checks if the mouse is held down
 //Then in mouseDragged we will show previews of shapes
 void mousePressed() {
-  //The following lines simply check if the user selects a "button"
-  //This will return and do nothing if the user is simply clicking a tool
-  if (checkForTools()) return;
-  //If the user selected a new colour
-  if (checkForColourChange()) return;
-  //If the user didn't click on a tool/colour, check if the mouse on canvas
-  if (!mouseIsOnCanvas()) return;
-  //TODO add if statements for each tool type
-  //Rect tool
-  if (tool == 5) {
-    dragging = true;
-    drag_x = mouseX;
-    drag_y = mouseY;
-  }
-  //If the tool is ....
-  if (tool == 1) {
-    //Something here
+  if (mouseIsOnCanvas()) {
+    //Rect tool
+    if (tool == 5) {
+      dragging = true;
+      drag_x = mouseX;
+      drag_y = mouseY;
+    }
+    //If the tool is ....
+    if (tool == 1) {
+      //Something here
+    }
+  } else {
+    //The following lines simply check if the user selects a "button"
+    //This will return and do nothing if the user is simply clicking a tool
+    if (checkForTools()) return;
+    //If the user selected a new colour
+    if (checkForColourChange()) return;
   }
 }
 
@@ -113,29 +113,11 @@ void mousePressed() {
 //This is used to actually commit a shape to the shapes array
 void mouseReleased() {
   //Rect tool
-  if(tool == 5){
-    if(dragging){
+  if (tool == 5) {
+    if (dragging) {
       //commit shape
       nRect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
       dragging = false;
     }
   }
 }
-
-/* mouse coordinates for buttons 
- 
- if (838 <= mouseX && mouseX <= 925 && 51 <= mouseY && mouseY <= 151){
- call draw tool;
- } else if (836 <= mouseX && mouseX <= 924 && 193 <= mouseY && mouseY <= 268){
- call eraser tool;
- } else if (838 <= mouseX && mouseX <= 873 && 317 <= mouseY && mouseY <= 347){
- call circle tool;
- } else if (885 <= mouseX && mouseX <= 928 && 312 <= mouseY && mouseY <= 356){
- call star tool;
- } else if (861 <= mouseX && mouseX <= 895 && 360 <= mouseY && mouseY <= 390){
- call rectangle tool;
- } else if (837 <= mouseX && mouseX <= 919 && 442 <= mouseY && mouseY <= 516){
- call line/stroke tool;
- }
- }
- */

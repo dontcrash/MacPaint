@@ -139,8 +139,6 @@ boolean checkForColourChange() {
 //And set tool = depending on where you click
 //Return true if a tool is selected
 boolean checkForTools() {
-  //TODO check if the mouse is clicked on tool icons
-  //Example code - if the users clicks between 0, 0 and 50, 50
   if (checkIfMouseClick(838, 925, 51, 151)) {
     tool = 1; //draw tool
     return true;
@@ -154,7 +152,7 @@ boolean checkForTools() {
     return true;
   } 
   if (checkIfMouseClick(885, 928, 312, 356)) {
-    tool = 4; // star tool
+    tool = 4; // triangle tool
     return true;
   } 
   if (checkIfMouseClick(861, 895, 360, 390)) {
