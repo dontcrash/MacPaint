@@ -13,6 +13,7 @@ ArrayList<Object> shapes = new ArrayList<Object>();
 
 //Background image object
 PImage bg;
+PImage colourmap;
 
 //Tool integer to keep track of what is selected
 int tool = 0;
@@ -55,6 +56,7 @@ void setup() {
   //We will draw the canvas layer on top of the shapes
   //This will ensure shapes aren't drawn on top of our application GUI
   bg = loadImage("Resources/background.png");
+  colourmap = loadImage("Resources/colourmap.png");
   if (debug_mode) stressTest(10);
 }
 
@@ -93,6 +95,7 @@ void draw() {
   if (tool == 2) {
     rect(838, 180, 100, 100);
   }
+  image(colourmap, width-100, height-100, 100, 100);
   noStroke();
 }
 
