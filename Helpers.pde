@@ -133,9 +133,30 @@ boolean checkForColourChange() {
 boolean checkForTools() {
   //TODO check if the mouse is clicked on tool icons
   //Example code - if the users clicks between 0, 0 and 50, 50
-  if (checkIfMouseClick(0, 0, 50, 50)) {
-    tool = 1;
+  if (checkIfMouseClick(838, 925, 51, 151)) {
+    tool = 1; //draw tool
     return true;
+  } 
+  if (checkIfMouseClick(836, 924, 193, 268)) {
+    tool = 2; // eraser tool
+    return true;
+  } 
+  if (checkIfMouseClick(838, 873, 317, 347)) {
+    tool = 3; // circle tool
+    return true;
+  } 
+  if (checkIfMouseClick(885, 928, 312, 356)) {
+    tool = 4; // star tool
+    return true;
+  } 
+  if (checkIfMouseClick(861, 895, 360, 390)) {
+    tool = 5; // rectangle/square tool
+    return true;
+  } 
+  if (checkIfMouseClick(837, 919, 442, 516)) {
+    tool = 6; // line tool 
+    return true;
+  } else {
+    return false;
   }
-  return false;
 }
