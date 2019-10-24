@@ -162,6 +162,8 @@ boolean checkForColourChange() {
 //Return true if a tool is selected
 boolean checkForTools() {
   if (checkIfMouseClick(838, 925, 51, 151)) {
+    last_x = -1;
+    last_y = -1;
     tool = 1; //draw tool
     return true;
   } 
