@@ -42,7 +42,7 @@ int colour_picker_frame = 0;
   
  Shapes available:
  nRect(x, y, w, h) - rectangle
- nCircle(x, y, d)  - circle
+ nEllipse(x, y, d)  - circle
  
  Functions available:
  stressTest(n) - stress tests the code by adding lots of shapes, n = shape count
@@ -138,6 +138,9 @@ void draw() {
 //Show preview of a shape here if conditions are met
 void mouseDragged() {
   if (mouseIsOnCanvas()) {
+    if (tool == 1) {
+      nEllipse(mouseX, mouseY, 3, 3);
+    }
     //Eraser
     if (tool == 2) {
       removeShapeByMouse();
