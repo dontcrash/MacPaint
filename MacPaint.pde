@@ -46,6 +46,7 @@ int colour_picker_frame = 0;
  Shapes available:
  nRect(x, y, w, h) - rectangle
  nEllipse(x, y, d)  - circle
+ nLine(x1, y1, x2, y2) - line
 
  Functions available:
  stressTest(n) - stress tests the code by adding lots of shapes, n = shape count
