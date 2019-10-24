@@ -38,8 +38,13 @@ boolean dragging = false;
 int colour_picker_alpha = 0;
 int colour_picker_frame = 0;
 
+//Buffer for draw tool
 int last_x = -1;
 int last_y = -1;
+
+float[] polygonX = new float[3];
+float[] polygonY = new float[3];
+
 
 /*
 
@@ -89,12 +94,38 @@ void draw() {
       c.draw();
       noStroke();
     }
+    if (s instanceof Triangle) {
+      Triangle c = (Triangle)s;
+      c.draw();
+    }
   }
   fill(0);
   if (dragging) {
     fill(current_colour);
     if (tool == 3) {
       ellipse(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
+    }
+    if (tool == 4) {
+      float startX = drag_x;
+      float startY = drag_y;
+      float endX = mouseX;
+      float endY = mouseY;
+
+      float deltaX =  ( startY - endY ) / 2;
+      float deltaY =  ( endX - startX ) / 2;
+
+      polygonX = new float[3];
+      polygonY = new float[3];
+
+      polygonX[0] = endX;
+      polygonY[0] = endY;
+
+      polygonX[1] = startX - deltaX;
+      polygonY[1] = startY - deltaY;
+
+      polygonX[2] = startX + deltaX;
+      polygonY[2] = startY + deltaY;
+      triangle(polygonX[0], polygonY[0], polygonX[1], polygonY[1], polygonX[2], polygonY[2]);
     }
     if (tool == 5) {
       rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
@@ -171,7 +202,14 @@ void mousePressed() {
     if (tool == 2) {
       removeShapeByMouse();
     }
+    //Circle
     if (tool == 3) {
+      dragging = true;
+      drag_x = mouseX;
+      drag_y = mouseY;
+    }
+    //Triangle tool
+    if (tool == 4) {
       dragging = true;
       drag_x = mouseX;
       drag_y = mouseY;
@@ -221,6 +259,9 @@ void mouseReleased() {
     if (tool == 3) {
       nEllipse(drag_x, drag_y, mx - drag_x, my - drag_y);
     }
+    if (tool == 4) {
+      nTriangle(polygonX[0], polygonY[0], polygonX[1], polygonY[1], polygonX[2], polygonY[2]);
+    }
     //Rect
     if (tool == 5) {
       nRect(drag_x, drag_y, mx - drag_x, my - drag_y);
@@ -259,7 +300,6 @@ void keyReleased() {
 
 
 /*
-Erasing of lines
- Drasw tool
- Triangles
- */
+ Erasing of lines
+ Erasing of triangles
+*/

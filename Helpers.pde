@@ -14,6 +14,10 @@ void stressTest(int n) {
   }
 }
 
+void nTriangle(float x1, float y1, float x2, float y2, float x3, float y3) {
+  addToShapes(new Triangle(x1, y1, x2, y2, x3, y3, current_colour));
+}
+
 void nRect(int x, int y, int w, int h) {
   addToShapes(new Rectangle(x, y, w, h, current_colour));
 }
@@ -45,6 +49,9 @@ void removeShapeByMouse() {
     }
     if (s instanceof Line) {
       if (handleLine(s)) break;
+    }
+    if (s instanceof Triangle) {
+      if (handleTriangle(s)) break;
     }
   }
 }
@@ -78,8 +85,15 @@ boolean handleEllipse(Object o) {
   return false;
 }
 
-boolean handleLine(Object o){
+boolean handleLine(Object o) {
   Line s = (Line)o;
+  shapes.remove(s);
+  //TODO this
+  return true;
+}
+
+boolean handleTriangle(Object o) {
+  Triangle s = (Triangle)o;
   shapes.remove(s);
   //TODO this
   return true;
