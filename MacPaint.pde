@@ -47,10 +47,10 @@ int last_y = -1;
  nRect(x, y, w, h) - rectangle
  nEllipse(x, y, d)  - circle
  nLine(x1, y1, x2, y2) - line
-
+ 
  Functions available:
  stressTest(n) - stress tests the code by adding lots of shapes, n = shape count
-
+ 
  Tool integers:
  1 - draw
  2 - eraser
@@ -58,7 +58,7 @@ int last_y = -1;
  4 - triangle
  5 - rect
  6 - line
-
+ 
  */
 
 void setup() {
@@ -99,7 +99,7 @@ void draw() {
     if (tool == 5) {
       rect(drag_x, drag_y, mouseX - drag_x, mouseY - drag_y);
     }
-    if(tool == 6){
+    if (tool == 6) {
       stroke(current_colour);
       line(drag_x, drag_y, mouseX, mouseY);
     }
@@ -129,9 +129,9 @@ void draw() {
   }
   image(colourmap, 820, 560, 140, 120);
   noStroke();
-  if(colour_picker_alpha > 0){
+  if (colour_picker_alpha > 0) {
     colour_picker_frame --;
-    if(colour_picker_frame <= 0){
+    if (colour_picker_frame <= 0) {
       colour_picker_alpha -= 20;
     }
     fill(red(current_colour), green(current_colour), blue(current_colour), colour_picker_alpha);
@@ -143,10 +143,10 @@ void draw() {
 void mouseDragged() {
   if (mouseIsOnCanvas()) {
     if (tool == 1) {
-      if(last_x == -1 && last_y == -1){
+      if (last_x == -1 && last_y == -1) {
         last_x = mouseX;
         last_y = mouseY;
-      }else{
+      } else {
         nLine(last_x, last_y, mouseX, mouseY);
         last_x = mouseX;
         last_y = mouseY;
@@ -202,6 +202,11 @@ void mousePressed() {
 void mouseReleased() {
   int mx = mouseX;
   int my = mouseY;
+  //Reset line position
+  if (tool == 1) {
+    last_x = -1;
+    last_y = -1;
+  }
   if (dragging) {
     //Swap positions if negative values
     if (mx < drag_x && tool != 6) {
@@ -221,7 +226,7 @@ void mouseReleased() {
       nRect(drag_x, drag_y, mx - drag_x, my - drag_y);
     }
     //Line
-    if(tool == 6){
+    if (tool == 6) {
       nLine(drag_x, drag_y, mouseX, mouseY);
     }
     dragging = false;
@@ -255,6 +260,6 @@ void keyReleased() {
 
 /*
 Erasing of lines
-Drasw tool
-Triangles
-*/
+ Drasw tool
+ Triangles
+ */
