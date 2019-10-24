@@ -4,6 +4,9 @@ int canvas_y = 33;
 int canvas_width = 729;
 int canvas_height = 502;
 
+import java.awt.Menu;
+import java.awt.*;
+
 //Store variables to detect Command + Z
 boolean command_down = false;
 boolean z_down = false;
@@ -43,6 +46,7 @@ int colour_picker_frame = 0;
  Shapes available:
  nRect(x, y, w, h) - rectangle
  nCircle(x, y, d)  - circle
+ nLine(x1, y1, x2, y2) - line
  
  Functions available:
  stressTest(n) - stress tests the code by adding lots of shapes, n = shape count
@@ -67,6 +71,12 @@ void setup() {
   bg = loadImage("Resources/background.png");
   colourmap = loadImage("Resources/colourmap.png");
   if (debug_mode) stressTest(10);
+  MenuBar mb = new MenuBar();  
+  Menu fm = new Menu("File");
+  mb.add(fm);
+  fm.add(new RedirectingMenuItem(this,"Open"));  
+  //fm.add(sl = new RedirectingMenuItem(this,"Save", new MenuShortcut( KeyEvent.VK_S )));
+  this.frame.setMenuBar(mb);
 }
 
 void draw() {
@@ -237,3 +247,10 @@ void keyReleased() {
     command_down = false;
   }
 }
+
+
+/*
+Erasing of lines
+Drasw tool
+Triangles
+*/
