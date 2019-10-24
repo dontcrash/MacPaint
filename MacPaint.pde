@@ -42,15 +42,14 @@ int colour_picker_alpha = 0;
 int colour_picker_frame = 0;
 
 /*
-  
+
  Shapes available:
  nRect(x, y, w, h) - rectangle
- nCircle(x, y, d)  - circle
- nLine(x1, y1, x2, y2) - line
- 
+ nEllipse(x, y, d)  - circle
+
  Functions available:
  stressTest(n) - stress tests the code by adding lots of shapes, n = shape count
- 
+
  Tool integers:
  1 - draw
  2 - eraser
@@ -58,7 +57,7 @@ int colour_picker_frame = 0;
  4 - triangle
  5 - rect
  6 - line
- 
+
  */
 
 void setup() {
@@ -71,10 +70,10 @@ void setup() {
   bg = loadImage("Resources/background.png");
   colourmap = loadImage("Resources/colourmap.png");
   if (debug_mode) stressTest(10);
-  MenuBar mb = new MenuBar();  
+  MenuBar mb = new MenuBar();
   Menu fm = new Menu("File");
   mb.add(fm);
-  fm.add(new RedirectingMenuItem(this,"Open"));  
+  fm.add(new RedirectingMenuItem(this,"Open"));
   //fm.add(sl = new RedirectingMenuItem(this,"Save", new MenuShortcut( KeyEvent.VK_S )));
   this.frame.setMenuBar(mb);
 }
@@ -123,13 +122,13 @@ void draw() {
   }
   if (tool == 3) {
     rect(838, 317, 40, 40);
-  } 
+  }
   if (tool == 4) {
     rect(889, 317, 40, 40);
-  } 
+  }
   if (tool == 5) {
     rect(858, 358, 40, 35);
-  } 
+  }
   if (tool == 6) {
     rect(837, 442, 80, 80);
   }
@@ -148,6 +147,9 @@ void draw() {
 //Show preview of a shape here if conditions are met
 void mouseDragged() {
   if (mouseIsOnCanvas()) {
+    if (tool == 1) {
+      nEllipse(mouseX, mouseY, 3, 3);
+    }
     //Eraser
     if (tool == 2) {
       removeShapeByMouse();
@@ -224,7 +226,7 @@ void mouseReleased() {
   }
 }
 
-void keyPressed() { 
+void keyPressed() {
   if (key == 122) {
     z_down = true;
   }
@@ -239,7 +241,7 @@ void keyPressed() {
   }
 }
 
-void keyReleased() {  
+void keyReleased() {
   if (key == 122) {
     z_down = false;
   }
