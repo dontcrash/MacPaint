@@ -80,6 +80,7 @@ boolean handleEllipse(Object o) {
 
 boolean handleLine(Object o){
   Line s = (Line)o;
+  shapes.remove(s);
   //TODO this
   return true;
 }
