@@ -4,9 +4,6 @@ int canvas_y = 33;
 int canvas_width = 729;
 int canvas_height = 502;
 
-import java.awt.Menu;
-import java.awt.*;
-
 //Store variables to detect Command + Z
 boolean command_down = false;
 boolean z_down = false;
@@ -41,6 +38,9 @@ boolean dragging = false;
 int colour_picker_alpha = 0;
 int colour_picker_frame = 0;
 
+int last_x = -1;
+int last_y = -1;
+
 /*
 
  Shapes available:
@@ -71,12 +71,6 @@ void setup() {
   bg = loadImage("Resources/background.png");
   colourmap = loadImage("Resources/colourmap.png");
   if (debug_mode) stressTest(10);
-  MenuBar mb = new MenuBar();
-  Menu fm = new Menu("File");
-  mb.add(fm);
-  fm.add(new RedirectingMenuItem(this,"Open"));
-  //fm.add(sl = new RedirectingMenuItem(this,"Save", new MenuShortcut( KeyEvent.VK_S )));
-  this.frame.setMenuBar(mb);
 }
 
 void draw() {
@@ -149,7 +143,14 @@ void draw() {
 void mouseDragged() {
   if (mouseIsOnCanvas()) {
     if (tool == 1) {
-      nEllipse(mouseX, mouseY, 3, 3);
+      if(last_x == -1 && last_y == -1){
+        last_x = mouseX;
+        last_y = mouseY;
+      }else{
+        nLine(last_x, last_y, mouseX, mouseY);
+        last_x = mouseX;
+        last_y = mouseY;
+      }
     }
     //Eraser
     if (tool == 2) {
