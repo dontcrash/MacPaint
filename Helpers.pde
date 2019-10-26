@@ -14,7 +14,7 @@ void stressTest(int n) {
   }
 }
 
-void nTriangle(float x1, float y1, float x2, float y2, float x3, float y3) {
+void nTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
   addToShapes(new Triangle(x1, y1, x2, y2, x3, y3, current_colour));
 }
 
@@ -87,34 +87,44 @@ boolean handleEllipse(Object o) {
 
 boolean handleLine(Object o) {
   Line s = (Line)o;
-  if(isInLine(mouseX, mouseY, s.x1, s.y1, s.x2, s.y2)){
+  if (isInLine(s.x1, s.y1, s.x2, s.y2, mouseX, mouseY, 3)) {
     shapes.remove(s);
   }
   return true;
 }
 
-float minimum_distance(int x1, int y1, int x2, int y2, int x3, int y3) {
-  float l2 = length_squared(v, w);
-  if (l2 == 0.0) return distance(p, v);
-  float t = max(0, min(1, dot(p - v, w - v) / l2));
-  vec2 projection = v + t * (w - v);
-  return distance(p, projection);
+boolean isInLine(int x1, int y1, int x2, int y2, int x3, int y3, int tolerance) {
+  if (is_between (x3, x1, x2, tolerance) && is_between (y3, y1, y2, tolerance)) {
+    if ((x2 - x1) == 0.0f) {
+      return (true);
+    }
+    float M = (y2 - y1) / (x2 - x1);
+    float C = -(M * x1) + y1;
+    println((abs (y3 - (M * x3 + C))));
+    //return (abs (y3 - (M * x3 + C)) <= tolerance);
+  }
+  return false;
 }
 
-boolean isInLine(int x1, int y1, int x2, int y2, int x3, int y3) {
-   float a1 = atan2(x1 - x2, y2 - y1);
-   float a2 = atan2(x2 - x3, y3 - y2);
-   float angle = 180 + a2 - a1;
-   if(angle < 0) angle = angle + 360;
-   println(angle);
-   return false;
+boolean is_between (int x, int bound1, int bound2, float tolerance) {
+  return (((x >= (bound1 - tolerance)) && (x <= (bound2 + tolerance))) || ((x >= (bound2 - tolerance)) && (x <= (bound1 + tolerance))));
 }
 
 boolean handleTriangle(Object o) {
   Triangle s = (Triangle)o;
-  shapes.remove(s);
-  //TODO this
+  if(isInsideTriangle(mouseX, mouseY, s.x, s.y, s.xx, s.yy, s.xxx, s.yyy)){
+    shapes.remove(s);
+  }
   return true;
+}
+
+boolean isInsideTriangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4){
+    int as_x = x1-x2;
+    int as_y = y1-y2;
+    boolean s_ab = (x3-x2)*as_y-(y3-y2)*as_x > 0;
+    if((x4-x2)*as_y-(y4-y2)*as_x > 0 == s_ab) return false;
+    if((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3) > 0 != s_ab) return false;
+    return true;
 }
 
 boolean pointInsideEllipse(Ellipse s) {

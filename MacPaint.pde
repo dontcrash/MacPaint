@@ -42,8 +42,8 @@ int colour_picker_frame = 0;
 int last_x = -1;
 int last_y = -1;
 
-float[] polygonX = new float[3];
-float[] polygonY = new float[3];
+int[] polygonX = new int[3];
+int[] polygonY = new int[3];
 
 
 /*
@@ -114,17 +114,14 @@ void draw() {
       float deltaX =  ( startY - endY ) / 2;
       float deltaY =  ( endX - startX ) / 2;
 
-      polygonX = new float[3];
-      polygonY = new float[3];
+      polygonX[0] = (int)endX;
+      polygonY[0] = (int)endY;
 
-      polygonX[0] = endX;
-      polygonY[0] = endY;
+      polygonX[1] = (int)startX - (int)deltaX;
+      polygonY[1] = (int)startY - (int)deltaY;
 
-      polygonX[1] = startX - deltaX;
-      polygonY[1] = startY - deltaY;
-
-      polygonX[2] = startX + deltaX;
-      polygonY[2] = startY + deltaY;
+      polygonX[2] = (int)startX + (int)deltaX;
+      polygonY[2] = (int)startY + (int)deltaY;
       triangle(polygonX[0], polygonY[0], polygonX[1], polygonY[1], polygonX[2], polygonY[2]);
     }
     if (tool == 5) {

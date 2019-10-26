@@ -123,14 +123,14 @@ public class Line extends Shape {
 //creating triangle function
 public class Triangle extends Shape {
 
-  float x;
-  float y;
-  float xx;
-  float yy;
-  float xxx;
-  float yyy;
+  int x;
+  int y;
+  int xx;
+  int yy;
+  int xxx;
+  int yyy;
 
-  public Triangle(float x1, float y1, float x2, float y2, float x3, float y3, color c1) {
+  public Triangle(int x1, int y1, int x2, int y2, int x3, int y3, color c1) {
     x = x1;
     y = y1;
     xx = x2;
@@ -140,24 +140,24 @@ public class Triangle extends Shape {
     c = c1;
   }
 
-  float getX() {
+  int getX() {
     return x;
   }
 
-  float getY() { 
+  int getY() { 
     return y;
   }
 
-  float getXX() {
+  int getXX() {
     return xx;
   }
-  float getYY() {
+  int getYY() {
     return yy;
   }
-  float getXXX() {
+  int getXXX() {
     return xxx;
   }
-  float getYYY() {
+  int getYYY() {
     return yyy;
   }
   
