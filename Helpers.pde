@@ -87,44 +87,43 @@ boolean handleEllipse(Object o) {
 
 boolean handleLine(Object o) {
   Line s = (Line)o;
-  if (isInLine(s.x1, s.y1, s.x2, s.y2, mouseX, mouseY, 3)) {
-    shapes.remove(s);
+  if (isInLine(s.x1, s.y1, s.x2, s.y2, mouseX, mouseY)) {
+    //shapes.remove(s);
   }
   return true;
 }
 
-boolean isInLine(int x1, int y1, int x2, int y2, int x3, int y3, int tolerance) {
-  if (is_between (x3, x1, x2, tolerance) && is_between (y3, y1, y2, tolerance)) {
-    if ((x2 - x1) == 0.0f) {
-      return (true);
-    }
-    float M = (y2 - y1) / (x2 - x1);
-    float C = -(M * x1) + y1;
-    println((abs (y3 - (M * x3 + C))));
-    //return (abs (y3 - (M * x3 + C)) <= tolerance);
+boolean isInLine(int x1, int y1, int x2, int y2, int x3, int y3) {
+  println("V1: " + distance(x1, y1, x3, y3) + distance(x2, y2, x3, y3));
+  println("V2: " + distance(x1, y1, x2, y2));
+  if ((distance(x1, y1, x3, y3) + distance(x2, y2, x3, y3)) == distance(x1, y1, x2, y2)) {
+    return true;
   }
   return false;
 }
 
-boolean is_between (int x, int bound1, int bound2, float tolerance) {
-  return (((x >= (bound1 - tolerance)) && (x <= (bound2 + tolerance))) || ((x >= (bound2 - tolerance)) && (x <= (bound1 + tolerance))));
+float distance(int x1, int y1, int x2, int y2) {
+  int base = x2 - x1;
+  int height = y2 - y1;
+  float hypotenuse = sqrt((base * base) + (height * height));
+  return hypotenuse;
 }
 
 boolean handleTriangle(Object o) {
   Triangle s = (Triangle)o;
-  if(isInsideTriangle(mouseX, mouseY, s.x, s.y, s.xx, s.yy, s.xxx, s.yyy)){
+  if (isInsideTriangle(mouseX, mouseY, s.x, s.y, s.xx, s.yy, s.xxx, s.yyy)) {
     shapes.remove(s);
   }
   return true;
 }
 
-boolean isInsideTriangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4){
-    int as_x = x1-x2;
-    int as_y = y1-y2;
-    boolean s_ab = (x3-x2)*as_y-(y3-y2)*as_x > 0;
-    if((x4-x2)*as_y-(y4-y2)*as_x > 0 == s_ab) return false;
-    if((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3) > 0 != s_ab) return false;
-    return true;
+boolean isInsideTriangle(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+  int as_x = x1-x2;
+  int as_y = y1-y2;
+  boolean s_ab = (x3-x2)*as_y-(y3-y2)*as_x > 0;
+  if ((x4-x2)*as_y-(y4-y2)*as_x > 0 == s_ab) return false;
+  if ((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3) > 0 != s_ab) return false;
+  return true;
 }
 
 boolean pointInsideEllipse(Ellipse s) {
@@ -232,4 +231,28 @@ boolean checkForTools() {
 
 void sendToOldArray() {
   old_shapes = (ArrayList)shapes.clone();
+}
+
+public static Point2D[] pointsAlongLine(Line2D line, int n) {
+    Point2D[] points = new Point2D[n];
+    if(n == 1) {
+        points[0] = line.getP1();
+        return points;
+    }
+    double dy = line.getY2() - line.getY1();
+    double dx = line.getX2() - line.getX1();
+    double theta = dx > 0.001 ? Math.atan(dy / dx) : dy < 0 ? -Math.PI : Math.PI;
+    double length = Math.abs(line.getP1().distance(line.getP2()));
+    int numSegments = n - 1;
+    double segmentLength = length / numSegments;
+    double x = line.getX1();
+    double y = line.getY1();
+    double ddx = segmentLength * Math.cos(theta);
+    double ddy = segmentLength * Math.sin(theta);
+    for(int i = 0; i < n; i++) {
+        points[i] = new Point2D.Double(x, y);
+        x += ddx;
+        y += ddy;
+    }
+    return points;
 }

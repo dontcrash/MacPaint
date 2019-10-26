@@ -1,3 +1,6 @@
+import java.awt.geom.Point2D;
+import java.awt.geom.Line2D;
+
 //"Drawable" canvas dimensions, used in helper functions
 int canvas_x = 40;
 int canvas_y = 33;
@@ -44,7 +47,6 @@ int last_y = -1;
 
 int[] polygonX = new int[3];
 int[] polygonY = new int[3];
-
 
 /*
 
@@ -265,7 +267,23 @@ void mouseReleased() {
     }
     //Line
     if (tool == 6) {
-      nLine(drag_x, drag_y, mouseX, mouseY);
+      float x1 = mouseX;
+      float y1 = mouseY;
+      float x2 = drag_x;
+      float y2 = drag_y;
+      if(mouseX > drag_x){
+        x1 = drag_x;
+        x2 = mouseX;
+        y1 = drag_y;
+        y2 = mouseY;
+      }
+      //New line method
+      Line2D line = new Line2D.Float(x1, y1, x2, y2);
+      Point2D[] points = pointsAlongLine(line, 150);
+      for(Point2D p : points){
+        nEllipse((int)p.getX(), (int)p.getY(), 7, 7); 
+      }
+      //nLine(drag_x, drag_y, mouseX, mouseY);
     }
     dragging = false;
   }
@@ -294,9 +312,3 @@ void keyReleased() {
     command_down = false;
   }
 }
-
-
-/*
- Erasing of lines
- Erasing of triangles
-*/
