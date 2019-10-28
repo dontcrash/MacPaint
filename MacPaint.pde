@@ -177,7 +177,9 @@ void mouseDragged() {
         last_x = mouseX;
         last_y = mouseY;
       } else {
-        nLine(last_x, last_y, mouseX, mouseY);
+        drag_x = last_x;
+        drag_y = last_y;
+        nLine(mouseX, mouseY, last_x, last_y);
         last_x = mouseX;
         last_y = mouseY;
       }
@@ -267,11 +269,12 @@ void mouseReleased() {
     }
     //Line
     if (tool == 6) {
-      float x1 = mouseX;
-      float y1 = mouseY;
-      float x2 = drag_x;
-      float y2 = drag_y;
-      if(mouseX > drag_x){
+      
+      int x1 = mouseX;
+      int x2 = drag_x;
+      int y1 = mouseY;
+      int y2 = drag_y;
+      if (mouseX > drag_x) {
         x1 = drag_x;
         x2 = mouseX;
         y1 = drag_y;
@@ -280,10 +283,11 @@ void mouseReleased() {
       //New line method
       Line2D line = new Line2D.Float(x1, y1, x2, y2);
       Point2D[] points = pointsAlongLine(line, 150);
-      for(Point2D p : points){
-        nEllipse((int)p.getX(), (int)p.getY(), 7, 7); 
+      for (Point2D p : points) {
+        nEllipse((int)p.getX(), (int)p.getY(), 7, 7);
       }
-      //nLine(drag_x, drag_y, mouseX, mouseY);
+      
+     // nLine(mouseX, mouseY, drag_x, drag_y);
     }
     dragging = false;
   }
@@ -293,6 +297,7 @@ void keyPressed() {
   if (key == 122) {
     z_down = true;
   }
+
   if (key == 65535) {
     command_down = true;
   }
