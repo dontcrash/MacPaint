@@ -2,14 +2,36 @@
 //Handled this at 22fps on my MacBook Pro
 void stressTest(int n) {
   for (int i = 0; i < n; i ++) {
-    int r = randomInt(1, 3);
+    int r = randomInt(1, 4);
     int rx = randomInt(canvas_x, canvas_x + canvas_width);
     int ry = randomInt(canvas_y, canvas_y + canvas_height);
-    if (r == 1) {
+    current_colour = color(random(0, 255), random(0, 255), random(0, 255));
+    if (r == 3) {
       nRect(rx, ry, randomInt(10, 50), randomInt(10, 50));
     }
     if (r == 2) {
       nEllipse(rx, ry, randomInt(3, width/20), randomInt(3, width/20));
+    }
+    if (r == 3) {
+      int rx2 = rx-5;
+      int ry2 = ry-5;
+      float startX = rx;
+      float startY = ry;
+      float endX = rx2;
+      float endY = ry2;
+
+      float deltaX =  ( startY - endY ) / 2;
+      float deltaY =  ( endX - startX ) / 2;
+
+      polygonX[0] = (int)endX;
+      polygonY[0] = (int)endY;
+
+      polygonX[1] = (int)startX - (int)deltaX;
+      polygonY[1] = (int)startY - (int)deltaY;
+
+      polygonX[2] = (int)startX + (int)deltaX;
+      polygonY[2] = (int)startY + (int)deltaY;
+      nTriangle(polygonX[0], polygonY[0], polygonX[1], polygonY[1], polygonX[2], polygonY[2]);
     }
   }
 }
@@ -94,8 +116,8 @@ boolean handleLine(Object o) {
 }
 
 boolean isInLine(int x1, int y1, int x2, int y2, int x3, int y3) {
-  println("V1: " + distance(x1, y1, x3, y3) + distance(x2, y2, x3, y3));
-  println("V2: " + distance(x1, y1, x2, y2));
+  //println("V1: " + distance(x1, y1, x3, y3) + distance(x2, y2, x3, y3));
+  //println("V2: " + distance(x1, y1, x2, y2));
   if ((distance(x1, y1, x3, y3) + distance(x2, y2, x3, y3)) == distance(x1, y1, x2, y2)) {
     return true;
   }

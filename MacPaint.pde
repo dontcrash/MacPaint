@@ -30,7 +30,7 @@ int tool = 0;
 
 //Boolean used to set if "debug" mode is on or off
 //Only used to test functions etc
-boolean debug_mode = false;
+boolean debug_mode = true;
 
 //Check for mouse drag
 int drag_x = 0;
@@ -77,7 +77,8 @@ void setup() {
   //This will ensure shapes aren't drawn on top of our application GUI
   bg = loadImage("Resources/background.png");
   colourmap = loadImage("Resources/colourmap.png");
-  if (debug_mode) stressTest(10);
+  if (debug_mode) stressTest(1000);
+  //noLoop();
 }
 
 void draw() {
